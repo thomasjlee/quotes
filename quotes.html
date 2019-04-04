@@ -24,17 +24,30 @@
       </button>
     </div>
 
+    <div>
+      <input
+        v-model="searchInput"
+        v-on:input="resetPage"
+        type="text"
+        placeholder="Search"
+        class="search-input" />
+    </div>
+
     <ul>
       <li
-        v-for="(quote, index) in paginate(quotesByTheme)"
+        v-for="(quote, index) in paginate(quotes)"
         v-bind:key="index">
         <p>{{ quote.quote }}</p>
         <p>- {{ quote.source }} from {{ quote.context }}</p>
       </li>
     </ul>
 
-    <div>
-      <button v-on:click="currentPage = 1"><<</button>
+    <div v-if="quotesUnavailable">
+      {{ quotesUnavailableMessage }}
+    </div>
+
+    <div v-if="shouldPaginate">
+      <button v-on:click="resetPage"><<</button>
       <button v-on:click="prevPage"><</button>
       {{ currentPage }} of {{ numPages }}
       <button v-on:click="nextPage">></button>

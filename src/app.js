@@ -3,7 +3,7 @@ const QUOTES_URL = 'https://gist.githubusercontent.com/benchprep/dffc3bffa970462
 new Vue({
   el: '#app',
   data: {
-    quotes: [],
+    allQuotes: [],
     selectedTheme: 'all',
     themes: [
       { text: 'All',    value: 'all' },
@@ -12,26 +12,59 @@ new Vue({
     ],
     currentPage: 1,
     quotesPerPage: 15,
+    searchInput: '',
   },
   computed: {
+    quotes: function() {
+      if (this.searchActive) {
+        return this.searchResults;
+      } else {
+        return this.quotesByTheme;
+      }
+    },
     quotesByTheme: function() {
       switch (this.selectedTheme) {
         case 'all':
-          return this.quotes;
+          return this.allQuotes;
         case 'movies':
-          return this.quotes.filter(quote => quote.theme === 'movies');
+          return this.allQuotes.filter(quote => quote.theme === 'movies');
         case 'games':
-          return this.quotes.filter(quote => quote.theme === 'games');
+          return this.allQuotes.filter(quote => quote.theme === 'games');
       }
     },
     numPages: function() {
-      return Math.ceil(this.quotesByTheme.length / this.quotesPerPage);
+      return Math.ceil(this.quotes.length / this.quotesPerPage);
     },
+    searchActive: function() {
+      return Boolean(this.searchInput.length);
+    },
+    searchResults: function() {
+      // TODO: Escape any characters that may not be valid in RegExp
+      return this.quotesByTheme.filter(quote => {
+        return new RegExp(this.searchInput, 'i').test(quote.quote);
+      });
+    },
+    shouldPaginate: function() {
+      if (this.searchActive) {
+        return this.searchResults.length > 15;
+      } else {
+        return this.quotesByTheme.length > 15;
+      }
+    },
+    quotesUnavailable: function() {
+      if (this.searchActive && this.searchResults.length === 0) {
+        this.quotesUnavailableMessage = 'No quotes match your query! (╯°□°)╯︵ ┻━┻';
+        return true;
+      } else if (this.quotesByTheme.length === 0) {
+        this.quotesUnavailableMessage = 'Sorry, no quotes are available at this time. ¯\\_(ツ)_/¯';
+        return true;
+      }
+    }
   },
   methods: {
     updateSelectedTheme: function(theme) {
       this.selectedTheme = theme;
-      this.currentPage = 1;
+      this.resetPage();
     },
     paginate: function(quotes) {
       const start = (this.currentPage - 1) * this.quotesPerPage;
@@ -47,11 +80,14 @@ new Vue({
         this.currentPage++;
       }
     },
+    resetPage: function() {
+      this.currentPage = 1;
+    },
   },
   mounted: function() {
     fetch(QUOTES_URL)
       .then(response => response.json())
-      .then(quotes => this.quotes = quotes)
+      .then(quotes => this.allQuotes = quotes)
       .catch(err => console.error(err));
   },
 });
