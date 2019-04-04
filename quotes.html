@@ -10,7 +10,16 @@
 </head>
 <body>
   <div id="app">
-    <p>All Aboard the Watermelon Express</p>
+    <h2 class="title">Quotes App</h2>
+
+    <ul>
+      <li
+        v-for="(quote, index) in quotes"
+        v-bind:key="index">
+        <p>{{ quote.quote }}</p>
+        <p>- {{ quote.source }} from {{ quote.context }}</p>
+      </li>
+    </ul>
   </div>
 
   <script src="src/app.js"></script>
