@@ -19,19 +19,27 @@
     <div>
       <button
         v-for="theme in themes"
-        v-on:click="selectedTheme = theme.value">
+        v-on:click="updateSelectedTheme(theme.value)">
         {{ theme.text }}
       </button>
     </div>
 
     <ul>
       <li
-        v-for="(quote, index) in quotesByTheme"
+        v-for="(quote, index) in paginate(quotesByTheme)"
         v-bind:key="index">
         <p>{{ quote.quote }}</p>
         <p>- {{ quote.source }} from {{ quote.context }}</p>
       </li>
     </ul>
+
+    <div>
+      <button v-on:click="currentPage = 1"><<</button>
+      <button v-on:click="prevPage"><</button>
+      {{ currentPage }} of {{ numPages }}
+      <button v-on:click="nextPage">></button>
+      <button v-on:click="currentPage = numPages">>></button>
+    </div>
   </div>
 
   <script src="src/app.js"></script>
