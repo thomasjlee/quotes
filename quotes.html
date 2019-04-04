@@ -20,7 +20,8 @@
     <div class="theme-select">
       <button
         v-for="theme in themes"
-        v-on:click="updateSelectedTheme(theme.value)">
+        v-on:click="updateSelectedTheme(theme.value)"
+        v-bind:class="[selectedTheme === theme.value ? 'active' : '']">
         {{ theme.text }}
       </button>
     </div>
@@ -52,7 +53,7 @@
       </li>
     </ul>
 
-    <div v-if="quotesUnavailable">
+    <div v-if="quotesUnavailable" class="no-quotes">
       {{ quotesUnavailableMessage }}
     </div>
   </div>
