@@ -3,7 +3,25 @@ const QUOTES_URL = 'https://gist.githubusercontent.com/benchprep/dffc3bffa970462
 new Vue({
   el: '#app',
   data: {
-    quotes: []
+    quotes: [],
+    themes: [
+      { text: 'All',    value: 'all' },
+      { text: 'Movies', value: 'movies' },
+      { text: 'Games',  value: 'games' }
+    ],
+    selectedTheme: 'all'
+  },
+  computed: {
+    quotesByTheme: function () {
+      switch (this.selectedTheme) {
+        case 'movies':
+          return this.quotes.filter(quote => quote.theme === 'movies');
+        case 'games':
+          return this.quotes.filter(quote => quote.theme === 'games');
+        default:
+          return this.quotes;
+      }
+    }
   },
   mounted: function() {
     fetch(QUOTES_URL)

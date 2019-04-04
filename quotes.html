@@ -16,9 +16,17 @@
   <div id="app">
     <h2 class="title">Quotes App</h2>
 
+    <div>
+      <button
+        v-for="theme in themes"
+        v-on:click="selectedTheme = theme.value">
+        {{ theme.text }}
+      </button>
+    </div>
+
     <ul>
       <li
-        v-for="(quote, index) in quotes"
+        v-for="(quote, index) in quotesByTheme"
         v-bind:key="index">
         <p>{{ quote.quote }}</p>
         <p>- {{ quote.source }} from {{ quote.context }}</p>
