@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -12,7 +12,7 @@
 </head>
 <body>
   <div id="app">
-    <h2 class="title">Quotes App</h2>
+    <h1 class="title">Quotes App</h1>
 
     <div class="theme-select">
       <button
@@ -24,9 +24,11 @@
     </div>
 
     <div class="search">
+      <label for="search" class="visually-hidden">Search</label>
       <input
         v-model="searchInput"
         v-on:input="resetPage"
+        id="search"
         type="text"
         placeholder="Search"
         class="search-input" />
