@@ -6,6 +6,7 @@
   <title>Quotes App</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" type="text/css" media="screen" href="quotes.css">
+  <link href="https://fonts.googleapis.com/css?family=Libre+Baskerville|Source+Sans+Pro" rel="stylesheet">
   <!-- development version, includes helpful console warnings -->
   <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
   <!-- production version, optimized for size and speed -->
@@ -16,7 +17,7 @@
   <div id="app">
     <h2 class="title">Quotes App</h2>
 
-    <div>
+    <div class="theme-select">
       <button
         v-for="theme in themes"
         v-on:click="updateSelectedTheme(theme.value)">
@@ -24,7 +25,7 @@
       </button>
     </div>
 
-    <div>
+    <div class="search">
       <input
         v-model="searchInput"
         v-on:input="resetPage"
@@ -33,25 +34,26 @@
         class="search-input" />
     </div>
 
+    <div v-if="shouldPaginate" class="pager">
+      <button v-on:click="resetPage"><<</button>
+      <button v-on:click="prevPage"><</button>
+      <p class="pager-numbers">{{ currentPage }} / {{ numPages }}</p>
+      <button v-on:click="nextPage">></button>
+      <button v-on:click="currentPage = numPages">>></button>
+    </div>
+
     <ul>
       <li
         v-for="(quote, index) in paginate(quotes)"
-        v-bind:key="index">
-        <p>{{ quote.quote }}</p>
-        <p>- {{ quote.source }} from {{ quote.context }}</p>
+        v-bind:key="index"
+        class="quote">
+        <p class="quote-text">{{ quote.quote }}</p>
+        <p class="quote-attribution">{{ quote.source }} - {{ quote.context }}</p>
       </li>
     </ul>
 
     <div v-if="quotesUnavailable">
       {{ quotesUnavailableMessage }}
-    </div>
-
-    <div v-if="shouldPaginate">
-      <button v-on:click="resetPage"><<</button>
-      <button v-on:click="prevPage"><</button>
-      {{ currentPage }} of {{ numPages }}
-      <button v-on:click="nextPage">></button>
-      <button v-on:click="currentPage = numPages">>></button>
     </div>
   </div>
 

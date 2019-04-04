@@ -1,0 +1,104 @@
+body {
+  font-family: 'Source Sans Pro', sans-serif;
+  max-width: 600px;
+  margin: 0 auto;
+  margin-bottom: 50px;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.title {
+  text-transform: uppercase;
+  color: #353551;
+  font-family: 'Libre Baskerville', serif;
+  text-align: center;
+}
+
+.theme-select {
+  display: flex;
+  justify-content: center;
+}
+
+.theme-select button {
+  font-size: 1.2rem;
+  background-color: #0e788f;
+  color: #ffffff;
+  padding: 5px 20px;
+  margin: 0 5px;
+  border: none;
+  border-radius: 2px;
+}
+
+.theme-select button:hover {
+  background-color: #0c687c;
+  cursor: pointer;
+}
+
+.search {
+  text-align: center;
+  margin: 10px 0;
+}
+
+.search input {
+  border: 1px solid #d2d2d2;
+  border-radius: 2px;
+  padding: 0.5em 0.6em;
+  width: 265px;
+  color: #353535;
+}
+
+.pager {
+  display: flex;
+  justify-content: center;
+}
+
+.pager button {
+  color: #b9b9b9;
+  padding: 0.5em 0.6em;
+  border: 1px solid #d2d2d2;
+  border-radius: 2px;
+  background-color: transparent;
+  margin: 0 1px;
+  cursor: pointer;
+}
+
+.pager-numbers {
+  color:#353535;
+  margin: 0 5px;
+  line-height: 28px;
+}
+
+.quote {
+  border-radius: 2px;
+  margin: 20px 0;
+  padding: 20px;
+  background-color: #cfe4e9;
+}
+
+.quote-text {
+  font-size: 1.4rem;
+  font-weight: bold;
+  color: #3a3a3a;
+}
+
+.quote-attribution {
+  text-align: right;
+  color: #353535;
+}
+
+/* whiteish: #e7f2f4 */
+/* light-blue: #cfe4e9 */
+/* dark-purple: #353551 */
+/* teal: #0e788f */
+/* dark-teal: #0c687c;
+/* grey: #9a9a9a */
+/* dark-grey: #353535 */
+
+/*
+  font-family: 'Libre Baskerville', serif;
+  font-family: 'Source Sans Pro', sans-serif;
+*/
