@@ -26,7 +26,7 @@ ul {
 .theme-select button {
   font-size: 1.2rem;
   background-color: #cfe4e9;
-  color: #3a3a3a;
+  color: #353535;
   padding: 5px 20px;
   margin: 0 5px;
   border: none;
@@ -65,11 +65,18 @@ ul {
 .pager button {
   color: #353535;
   padding: 0.5em 0.6em;
-  border: 1px solid #d2d2d2;
+  width: 40px;
+  border: none;
   border-radius: 2px;
-  background-color: transparent;
+  background-color: #cfe4e9;
   margin: 0 1px;
   cursor: pointer;
+}
+
+.pager button:disabled {
+  color: #ffffff;
+  background-color: #d2d2d2;
+  cursor: default;
 }
 
 .pager-numbers {

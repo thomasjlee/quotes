@@ -35,11 +35,27 @@
     </div>
 
     <div v-if="shouldPaginate" class="pager">
-      <button v-on:click="resetPage"><<</button>
-      <button v-on:click="prevPage"><</button>
+      <button
+        v-on:click="resetPage"
+        v-bind:disabled="currentPage === 1">
+        <<
+      </button>
+      <button
+        v-on:click="prevPage"
+        v-bind:disabled="currentPage === 1">
+        <
+      </button>
       <p class="pager-numbers">{{ currentPage }} / {{ numPages }}</p>
-      <button v-on:click="nextPage">></button>
-      <button v-on:click="currentPage = numPages">>></button>
+      <button
+        v-on:click="nextPage"
+        v-bind:disabled="currentPage === numPages">
+        >
+      </button>
+      <button
+        v-on:click="currentPage = numPages"
+        v-bind:disabled="currentPage === numPages">
+        >>
+      </button>
     </div>
 
     <ul>
