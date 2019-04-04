@@ -2,7 +2,7 @@
 
 ## Setup
 
- * TODO
+Open `quotes.html` in your browser.
 
 ## Original Instructions
 
