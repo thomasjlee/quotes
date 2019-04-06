@@ -39,7 +39,6 @@ new Vue({
       return Boolean(this.searchInput.length);
     },
     searchResults: function() {
-      // TODO: Escape any characters that may not be valid in RegExp
       return this.quotesByTheme.filter(quote => {
         return new RegExp(this.searchInput, 'i').test(quote.quote);
       });
